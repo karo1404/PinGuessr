@@ -15,17 +15,21 @@ body {
   margin: 0;
   color: var(--primary);
   background-color: var(--background);
-  font-family: "Headland One", serif;
+  font-family: 'Cabin', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 `;
 
 const LayoutContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  height: 95vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr min-content;
   gap: 3rem;
-  align-items: center;
+  place-items: center;
+  place-content: center;
 `;
 
 function App() {

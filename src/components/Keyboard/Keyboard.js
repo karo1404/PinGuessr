@@ -27,6 +27,7 @@ const Key = styled.button`
   background-color: ${(props) =>
     props.possible ? "var(--gray-light)" : "var(--gray-dark)"};
   color: white;
+  font-family: "Cabin", sans-serif;
   font-weight: bold;
   border: none;
   border-radius: 0.25rem;
