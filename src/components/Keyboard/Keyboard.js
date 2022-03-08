@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import back from "../../assets/back.svg";
+import useEventListener from "../../hooks/useEventListener";
 
 const KeyboardContainer = styled.div`
   width: 100%;
@@ -33,11 +34,29 @@ const Key = styled.button`
   transition: opacity 0.2s;
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 `;
 
 function Keyboard({ inputs, clickCallback }) {
+  const handlePhysicalKeyPress = ({ key }) => {
+    const NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    switch (key) {
+      case "Enter":
+        clickCallback("ENTER");
+        break;
+      case "Backspace":
+        clickCallback("CLEAR");
+        break;
+      default:
+        if (NUMBERS.includes(key.toString())) {
+          clickCallback(key);
+        }
+    }
+  };
+
+  useEventListener("keydown", handlePhysicalKeyPress);
+
   return (
     <KeyboardContainer>
       <KeyboardRow>

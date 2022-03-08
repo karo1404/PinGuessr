@@ -25,7 +25,7 @@ const BoardContainer = styled.div`
 const BoardCell = styled.div`
   width: 4rem;
   height: 4rem;
-  box-shadow: inset 0px 0px 0px 2px var(--gray-light);
+  box-shadow: inset 0px 0px 0px 2px var(--gray-dark);
   font-size: 2.5rem;
   display: flex;
   align-items: center;

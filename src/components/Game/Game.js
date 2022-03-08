@@ -75,8 +75,10 @@ function Game() {
       number.toString();
     newBoard[cursorPosition.row][cursorPosition.col].state =
       BoardElementState.FILLED;
-    setBoard(newBoard);
-    setCursorPosition((prev) => ({ row: prev.row, col: prev.col + 1 }));
+    setBoard(
+      newBoard,
+      setCursorPosition((prev) => ({ row: prev.row, col: prev.col + 1 }))
+    );
   }
 
   function removeNumber() {
@@ -86,8 +88,10 @@ function Game() {
     newBoard[cursorPosition.row][cursorPosition.col - 1].content = "";
     newBoard[cursorPosition.row][cursorPosition.col - 1].state =
       BoardElementState.EMPTY;
-    setBoard(newBoard);
-    setCursorPosition((prev) => ({ row: prev.row, col: prev.col - 1 }));
+    setBoard(
+      newBoard,
+      setCursorPosition((prev) => ({ row: prev.row, col: prev.col - 1 }))
+    );
   }
 
   function checkSolution() {
