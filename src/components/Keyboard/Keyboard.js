@@ -1,33 +1,43 @@
 import styled from "styled-components";
 import back from "../../assets/back.svg";
+import { NUMBER_OF_TRIES, PIN_LENGTH } from "../../assets/const";
 import useEventListener from "../../hooks/useEventListener";
 
 const KeyboardContainer = styled.div`
   width: 100%;
+  height: min-content;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  align-items: center;
-  margin-bottom: 10vh;
+  place-items: center;
+  place-content: center;
+  padding-bottom: 1rem;
 `;
 
 const KeyboardRow = styled.div`
   display: flex;
   flex: 1 1;
   gap: 0.5rem;
-  width: 25%;
-  min-width: 22rem;
+  width: calc(
+    min(
+        calc(57vh / ${NUMBER_OF_TRIES} + 1rem),
+        calc(100vw / ${PIN_LENGTH} + 1rem)
+      ) * ${PIN_LENGTH}
+  );
+  min-width: calc(10 * (18px + 0.5rem));
+  max-width: 95%;
   justify-content: stretch;
   align-content: stretch;
 
-  @media (max-width: 768px) {
-    width: 80%;
+  @media only screen and (max-width: 768px) {
+    min-width: 0px;
+    width: 90%;
   }
 `;
 
 const Key = styled.button`
   width: 100%;
-  height: 3rem;
+  height: calc(2rem + 2vh);
   font-size: 1rem;
   background-color: ${(props) =>
     props.possible ? "var(--gray-light)" : "var(--gray-dark)"};
@@ -37,11 +47,6 @@ const Key = styled.button`
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.9;
-  }
 `;
 
 function Keyboard({ inputs, clickCallback }) {

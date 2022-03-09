@@ -15,6 +15,7 @@ body {
   --green: #6aaa64;
   --yellow: #c9b458;
 
+  min-height: 100%;
   margin: 0;
   color: var(--primary);
   background-color: var(--background);
@@ -22,17 +23,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+html { height: 100%; }
 `;
 
 const LayoutContainer = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr min-content;
-  gap: 3rem;
-  place-items: center;
+  grid-template-rows: 10vh 57vh 27vh;
+  gap: 3vh;
   place-content: center;
+  place-items: center;
+  grid-template-areas:
+    "title"
+    "board"
+    "keyboard";
 `;
 
 function App() {

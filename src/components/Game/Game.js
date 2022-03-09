@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { NUMBER_OF_TRIES, PIN_LENGTH } from "../../assets/const";
 import Board from "../Board/Board";
 import Keyboard from "../Keyboard/Keyboard";
 import { ModalType } from "../Modal/Modal";
 
-export const NUMBER_OF_TRIES = 5;
-export const PIN_LENGTH = 4;
 export const BoardElementState = {
   EMPTY: "EMPTY",
   FILLED: "FILLED",

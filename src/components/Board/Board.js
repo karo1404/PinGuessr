@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { css } from "styled-components";
-import { NUMBER_OF_TRIES, PIN_LENGTH, BoardElementState } from "../Game/Game";
+import { NUMBER_OF_TRIES, PIN_LENGTH } from "../../assets/const";
+import { BoardElementState } from "../Game/Game";
 
 const popAnimation = keyframes`
   50%  {transform: scale(1.3);}
@@ -14,7 +15,8 @@ export const BoardContainer = styled.div`
   display: grid;
   height: min-content;
   width: min-content;
-  gap: 0.5rem;
+  margin: auto;
+  gap: 8px;
   grid-template-rows: ${(props) =>
     props.rows ? `repeat(${props.rows}, 1fr)` : "repeat(5, 1fr)"};
   grid-template-columns: ${(props) =>
@@ -24,14 +26,20 @@ export const BoardContainer = styled.div`
 `;
 
 export const BoardCell = styled.div`
-  width: 4vw;
-  height: 4vw;
-  max-width: 6rem;
-  max-height: 6rem;
-  aspect-ratio: 1 / 1;
+  width: min(
+    calc(57vh / ${NUMBER_OF_TRIES || 5} - 16px),
+    calc(100vw / ${PIN_LENGTH} - 16px)
+  );
+  height: min(
+    calc(57vh / ${NUMBER_OF_TRIES} - 16px),
+    calc(100vw / ${PIN_LENGTH} - 16px)
+  );
 
   box-shadow: inset 0px 0px 0px 2px var(--gray-dark);
-  font-size: 2.5rem;
+  font-size: min(
+    calc(52vh / ${NUMBER_OF_TRIES} - 16px),
+    calc(95vw / ${PIN_LENGTH} - 16px)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,11 +73,6 @@ export const BoardCell = styled.div`
         animation: ${rotateAnimation} 0.5s linear 1;
         transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
       `)};
-
-  @media (max-width: 576px) {
-    width: 18vw;
-    height: 18vw;
-  }
 `;
 
 function Board({ boardState }) {
