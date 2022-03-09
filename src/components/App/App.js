@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import Game from "../Game/Game";
+import Modal from "../Modal/Modal";
 import Navbar from "../Navbar/Navbar";
+import { ModalType } from "../Modal/Modal";
+import { useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -23,24 +26,37 @@ body {
 
 const LayoutContainer = styled.div`
   width: 100%;
-  height: 95vh;
+  min-height: 95vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-rows: max-content 1fr min-content;
   gap: 3rem;
   place-items: center;
   place-content: center;
 `;
 
 function App() {
+  const [modal, setModal] = useState(ModalType.TUTORIAL);
+  const [resetBoard, setResetBoard] = useState(false);
+
+  const setModalType = (type) => {
+    setModal(type);
+  };
+
+  const handleCloseModal = () => {
+    setModal(ModalType.NONE);
+    setResetBoard((prev) => !prev);
+  };
+
   return (
-    <div>
+    <>
       <GlobalStyle />
+      <Modal modalType={modal} closeCallback={handleCloseModal} />
       <LayoutContainer>
         <Navbar />
-        <Game />
+        <Game displayModalCallback={setModalType} newGame={resetBoard} />
       </LayoutContainer>
-    </div>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Board from "../Board/Board";
 import Keyboard from "../Keyboard/Keyboard";
+import { ModalType } from "../Modal/Modal";
 
 export const NUMBER_OF_TRIES = 5;
 export const PIN_LENGTH = 4;
@@ -13,47 +14,21 @@ export const BoardElementState = {
 };
 export const GameState = {
   IN_PROGRESS: "IN_PROGRESS",
-  WON: "WON",
-  LOST: "LOST",
+  WIN: "WIN",
+  LOSE: "LOSE",
 };
 
-function Game() {
+function Game({ displayModalCallback, newGame }) {
   const [board, setBoard] = useState([]);
   const [inputs, setInputs] = useState([]);
   const [cursorPosition, setCursorPosition] = useState({ row: 0, col: 0 });
   const [solution, setSolution] = useState([]);
-  const [gameState, setGameState] = useState(GameState.IN_PROGRESS);
 
   useEffect(() => {
-    const initialBoard = [];
-    for (let row = 0; row < NUMBER_OF_TRIES; row++) {
-      const rowElements = [];
-      for (let col = 0; col < PIN_LENGTH; col++) {
-        rowElements[col] = {
-          content: "",
-          state: BoardElementState.EMPTY,
-        };
-      }
-      initialBoard[row] = rowElements;
-    }
-
-    const initialInputs = [];
-    for (let number = 0; number < 10; number++) {
-      initialInputs[number] = { number, possible: true };
-    }
-
-    const newSolution = new Array(PIN_LENGTH);
-    for (let position = 0; position < PIN_LENGTH; position++) {
-      newSolution[position] = Math.floor(Math.random() * 10);
-    }
-
-    setBoard(initialBoard);
-    setInputs(initialInputs);
-    setSolution(newSolution);
-  }, []);
+    resetBoard();
+  }, [newGame]);
 
   const handleInput = (key) => {
-    if (gameState !== GameState.IN_PROGRESS) return;
     switch (key) {
       case "ENTER":
         checkSolution();
@@ -65,6 +40,34 @@ function Game() {
         insertNumber(Number.parseInt(key));
     }
   };
+
+  function resetBoard() {
+    const initialBoard = [];
+    for (let row = 0; row < NUMBER_OF_TRIES; row++) {
+      const rowElements = [];
+      for (let col = 0; col < PIN_LENGTH; col++) {
+        rowElements[col] = {
+          content: "",
+          state: BoardElementState.EMPTY,
+        };
+      }
+      initialBoard[row] = rowElements;
+    }
+    setBoard(initialBoard);
+
+    const initialInputs = [];
+    for (let number = 0; number < 10; number++) {
+      initialInputs[number] = { number, possible: true };
+    }
+    setInputs(initialInputs);
+
+    const newSolution = new Array(PIN_LENGTH);
+    for (let position = 0; position < PIN_LENGTH; position++) {
+      newSolution[position] = Math.floor(Math.random() * 10);
+    }
+    setSolution(newSolution);
+    setCursorPosition({ row: 0, col: 0 });
+  }
 
   function insertNumber(number = 0) {
     if (cursorPosition.col >= PIN_LENGTH) return;
@@ -148,11 +151,12 @@ function Game() {
     );
 
     if (correct) {
-      setGameState(GameState.WON);
+      displayModalCallback(ModalType.WIN);
     } else if (cursorPosition.row + 1 >= NUMBER_OF_TRIES) {
-      setGameState(GameState.LOST);
+      displayModalCallback(ModalType.LOSE);
+    } else {
+      setCursorPosition((prev) => ({ row: prev.row + 1, col: 0 }));
     }
-    setCursorPosition((prev) => ({ row: prev.row + 1, col: 0 }));
   }
 
   function disableImpossibleInputs(numbers) {

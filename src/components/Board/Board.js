@@ -10,7 +10,7 @@ const popAnimation = keyframes`
 const rotateAnimation = keyframes`
 50% {transform: rotateX( 90deg );}`;
 
-const BoardContainer = styled.div`
+export const BoardContainer = styled.div`
   display: grid;
   height: min-content;
   width: min-content;
@@ -23,7 +23,7 @@ const BoardContainer = styled.div`
   place-content: center;
 `;
 
-const BoardCell = styled.div`
+export const BoardCell = styled.div`
   width: 4rem;
   height: 4rem;
   aspect-ratio: 1 / 1;
@@ -35,7 +35,7 @@ const BoardCell = styled.div`
   justify-content: center;
   color: white;
   background-color: var(--background);
-  transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
+  z-index: -100;
 
   ${(props) =>
     (props.state === BoardElementState.FILLED &&
@@ -45,21 +45,24 @@ const BoardCell = styled.div`
     (props.state === BoardElementState.WRONG_POSITION &&
       css`
         background-color: var(--yellow);
-        box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
-        animation: ${rotateAnimation} 0.5s linear 1;
       `) ||
     (props.state === BoardElementState.CORRECT &&
       css`
         background-color: var(--green);
-        box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
-        animation: ${rotateAnimation} 0.5s linear 1;
       `) ||
     (props.state === BoardElementState.WRONG &&
       css`
         background-color: var(--gray-dark);
-        box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
-        animation: ${rotateAnimation} 0.5s linear 1;
       `)};
+
+  ${(props) =>
+    props.state !== BoardElementState.FILLED &&
+    props.state !== BoardElementState.EMPTY &&
+    css`
+      box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
+      animation: ${rotateAnimation} 0.5s linear 1;
+      transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
+    `};
 `;
 
 function Board({ boardState }) {
