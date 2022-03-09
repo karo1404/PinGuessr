@@ -26,7 +26,7 @@ body {
 
 const LayoutContainer = styled.div`
   width: 100%;
-  min-height: 95vh;
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: max-content 1fr min-content;

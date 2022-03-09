@@ -8,6 +8,7 @@ const KeyboardContainer = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
+  margin-bottom: 10vh;
 `;
 
 const KeyboardRow = styled.div`
@@ -15,9 +16,13 @@ const KeyboardRow = styled.div`
   flex: 1 1;
   gap: 0.5rem;
   width: 25%;
-  min-width: 20rem;
+  min-width: 22rem;
   justify-content: stretch;
   align-content: stretch;
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const Key = styled.button`
