@@ -45,24 +45,24 @@ export const BoardCell = styled.div`
     (props.state === BoardElementState.WRONG_POSITION &&
       css`
         background-color: var(--yellow);
+        box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
+        animation: ${rotateAnimation} 0.5s linear 1;
+        transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
       `) ||
     (props.state === BoardElementState.CORRECT &&
       css`
         background-color: var(--green);
+        box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
+        animation: ${rotateAnimation} 0.5s linear 1;
+        transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
       `) ||
     (props.state === BoardElementState.WRONG &&
       css`
         background-color: var(--gray-dark);
+        box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
+        animation: ${rotateAnimation} 0.5s linear 1;
+        transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
       `)};
-
-  ${(props) =>
-    props.state !== BoardElementState.FILLED &&
-    props.state !== BoardElementState.EMPTY &&
-    css`
-      box-shadow: inset 0px 0px 0px 2px rgba(0, 0, 0, 0);
-      animation: ${rotateAnimation} 0.5s linear 1;
-      transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
-    `};
 `;
 
 function Board({ boardState }) {
