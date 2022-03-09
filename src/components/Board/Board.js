@@ -24,8 +24,10 @@ export const BoardContainer = styled.div`
 `;
 
 export const BoardCell = styled.div`
-  width: 4rem;
-  height: 4rem;
+  width: 4vw;
+  height: 4vw;
+  max-width: 6rem;
+  max-height: 6rem;
   aspect-ratio: 1 / 1;
 
   box-shadow: inset 0px 0px 0px 2px var(--gray-dark);
@@ -63,6 +65,11 @@ export const BoardCell = styled.div`
         animation: ${rotateAnimation} 0.5s linear 1;
         transition: background-color 0s linear 0.25s, box-shadow 0s linear 0.25s;
       `)};
+
+  @media (max-width: 576px) {
+    width: 18vw;
+    height: 18vw;
+  }
 `;
 
 function Board({ boardState }) {
