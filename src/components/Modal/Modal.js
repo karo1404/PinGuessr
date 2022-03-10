@@ -96,30 +96,36 @@ const modals = {
         <hr />
         <p>After each attempt, the numbers will be marked accordingly: </p>
         <BoardContainer rows={1} columns={4}>
-          <BoardCell>2</BoardCell>
-          <BoardCell>1</BoardCell>
-          <BoardCell state={"CORRECT"}>3</BoardCell>
-          <BoardCell>7</BoardCell>
+          <BoardCell compact>2</BoardCell>
+          <BoardCell compact>1</BoardCell>
+          <BoardCell state={"CORRECT"} compact>
+            3
+          </BoardCell>
+          <BoardCell compact>7</BoardCell>
         </BoardContainer>
         <p>
           If a letter is highlighted in green, it appears in the same place in
           the password
         </p>
         <BoardContainer rows={1} columns={4}>
-          <BoardCell>2</BoardCell>
-          <BoardCell state={"WRONG_POSITION"}>1</BoardCell>
-          <BoardCell>3</BoardCell>
-          <BoardCell>7</BoardCell>
+          <BoardCell compact>2</BoardCell>
+          <BoardCell state={"WRONG_POSITION"} compact>
+            1
+          </BoardCell>
+          <BoardCell compact>3</BoardCell>
+          <BoardCell compact>7</BoardCell>
         </BoardContainer>
         <p>
           If a letter is highlighted in yellow, it appears in the password but
           in a different place
         </p>
         <BoardContainer rows={1} columns={4}>
-          <BoardCell state={"WRONG"}>2</BoardCell>
-          <BoardCell>1</BoardCell>
-          <BoardCell>3</BoardCell>
-          <BoardCell>7</BoardCell>
+          <BoardCell state={"WRONG"} compact>
+            2
+          </BoardCell>
+          <BoardCell compact>1</BoardCell>
+          <BoardCell compact>3</BoardCell>
+          <BoardCell compact>7</BoardCell>
         </BoardContainer>
         <p>
           If a letter is not highlighted, it does not appear in the password

@@ -26,20 +26,29 @@ export const BoardContainer = styled.div`
 `;
 
 export const BoardCell = styled.div`
-  width: min(
+  width: ${(props) =>
+    props.compact
+      ? "3rem"
+      : `min(
     calc(57vh / ${NUMBER_OF_TRIES || 5} - 16px),
     calc(100vw / ${PIN_LENGTH} - 16px)
-  );
-  height: min(
-    calc(57vh / ${NUMBER_OF_TRIES} - 16px),
+  )`};
+  height: ${(props) =>
+    props.compact
+      ? "3rem"
+      : `min(
+    calc(57vh / ${NUMBER_OF_TRIES || 5} - 16px),
     calc(100vw / ${PIN_LENGTH} - 16px)
-  );
+  )`};
 
   box-shadow: inset 0px 0px 0px 2px var(--gray-dark);
-  font-size: min(
+  font-size: ${(props) =>
+    props.compact
+      ? "2rem"
+      : `min(
     calc(52vh / ${NUMBER_OF_TRIES} - 16px),
     calc(95vw / ${PIN_LENGTH} - 16px)
-  );
+  )`};
   display: flex;
   align-items: center;
   justify-content: center;
