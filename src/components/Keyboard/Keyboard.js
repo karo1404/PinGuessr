@@ -29,17 +29,17 @@ const KeyboardRow = styled.div`
   justify-content: stretch;
   align-content: stretch;
 
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+    min-width: 0px;
+    width: 90%;
+  }
+
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    min-width: 0px;
+    width: 90%;
+  }
+
   @media only screen and (max-width: 768px) {
-    min-width: 0px;
-    width: 90%;
-  }
-
-  @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
-    min-width: 0px;
-    width: 90%;
-  }
-
-  @media only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
     min-width: 0px;
     width: 90%;
   }
