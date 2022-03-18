@@ -4,13 +4,14 @@ import { NUMBER_OF_TRIES, PIN_LENGTH } from "../../assets/const";
 import useEventListener from "../../hooks/useEventListener";
 
 const KeyboardContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   height: min-content;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   place-items: center;
   place-content: center;
+  align-self: baseline;
   padding-bottom: 1rem;
 `;
 
@@ -25,23 +26,23 @@ const KeyboardRow = styled.div`
       ) * ${PIN_LENGTH}
   );
   min-width: calc(10 * (18px + 0.5rem));
-  max-width: 95%;
+  max-width: 95vw;
   justify-content: stretch;
   align-content: stretch;
 
-  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 3) {
     min-width: 0px;
-    width: 90%;
+    width: 90vw;
   }
 
-  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
     min-width: 0px;
-    width: 90%;
+    width: 90vw;
   }
 
   @media only screen and (max-width: 768px) {
     min-width: 0px;
-    width: 90%;
+    width: 90vw;
   }
 `;
 
@@ -49,6 +50,8 @@ const Key = styled.button`
   width: 100%;
   height: calc(2rem + 2vh);
   font-size: 1rem;
+  padding: 0;
+  margin: 0;
   background-color: ${(props) =>
     props.possible ? "var(--gray-light)" : "var(--gray-dark)"};
   color: white;

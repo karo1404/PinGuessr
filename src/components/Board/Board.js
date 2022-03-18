@@ -16,6 +16,7 @@ export const BoardContainer = styled.div`
   height: min-content;
   width: min-content;
   margin: auto;
+  padding: 0px;
   gap: 8px;
   grid-template-rows: ${(props) =>
     props.rows ? `repeat(${props.rows}, 1fr)` : "repeat(5, 1fr)"};
@@ -30,15 +31,15 @@ export const BoardCell = styled.div`
     props.compact
       ? "3rem"
       : `min(
-    calc(57vh / ${NUMBER_OF_TRIES || 5} - 16px),
-    calc(100vw / ${PIN_LENGTH} - 16px)
+    calc(57vh / ${NUMBER_OF_TRIES || 5} - 10px),
+    calc(100vw / ${PIN_LENGTH || 4} - 10px)
   )`};
   height: ${(props) =>
     props.compact
       ? "3rem"
       : `min(
-    calc(57vh / ${NUMBER_OF_TRIES || 5} - 16px),
-    calc(100vw / ${PIN_LENGTH} - 16px)
+    calc(57vh / ${NUMBER_OF_TRIES || 5} - 10px),
+    calc(100vw / ${PIN_LENGTH || 4} - 10px)
   )`};
 
   box-shadow: inset 0px 0px 0px 2px var(--gray-dark);

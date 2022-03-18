@@ -4,7 +4,7 @@ import Game from "../Game/Game";
 import Modal from "../Modal/Modal";
 import Navbar from "../Navbar/Navbar";
 import { ModalType } from "../Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -15,21 +15,38 @@ body {
   --green: #6aaa64;
   --yellow: #c9b458;
 
-  min-height: 100%;
+  display: flex; 
+  flex-direction: column;
   margin: 0;
+  min-height: 100vh;
+  touch-action: none;
   color: var(--primary);
   background-color: var(--background);
   font-family: 'Cabin', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+    min-height: calc()(100vh + 1px);
+  }
+
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    min-height: calc()(100vh + 1px);
+  }
 }
 
-html { height: 100%; }
+html { 
+  position: relative;
+    overflow: hidden;
+    height: 100vh; 
+    }
 `;
 
 const LayoutContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  min-height: -webkit-fill-available;
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 10vh 57vh 27vh;
@@ -45,6 +62,25 @@ const LayoutContainer = styled.div`
 function App() {
   const [modal, setModal] = useState(ModalType.TUTORIAL);
   const [resetBoard, setResetBoard] = useState(false);
+  useEffect(() => {
+    /*iPhone fix*/
+    if (!window.location.hash && window.addEventListener) {
+      function scrollToNothing() {
+        setTimeout(function () {
+          window.scrollTo(0, 0);
+        }, 0);
+      }
+
+      window.addEventListener("load", scrollToNothing);
+      window.addEventListener("orientationchange", scrollToNothing);
+      window.addEventListener("touchstart", scrollToNothing);
+      return () => {
+        window.removeEventListener("load", scrollToNothing);
+        window.removeEventListener("orientationchange", scrollToNothing);
+        window.removeEventListener("touchstart", scrollToNothing);
+      };
+    }
+  }, []);
 
   const setModalType = (type) => {
     setModal(type);

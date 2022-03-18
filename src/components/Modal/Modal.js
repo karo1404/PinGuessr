@@ -15,14 +15,14 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: fixed;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   pointer-events: ${(props) => (props.isDisplayed ? "auto" : "none")};
 `;
 
 const ModalBackground = styled.div`
   position: fixed;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-color: black;
   opacity: ${(props) => (props.isDisplayed ? "0.6" : "0")};
@@ -51,6 +51,14 @@ const ModalWindow = styled.div`
     "title button"
     "content content";
   place-items: center;
+
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+    margin-bottom: 10vh;
+  }
+
+  @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    margin-bottom: 10vh;
+  }
 `;
 
 const ModalCloseButton = styled.button`
